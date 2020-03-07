@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/stumpam/ngx-cz-id/compare/v1.0.1...v1.1.0) (2020-03-07)
+
+
+### Features
+
+* **demo:** update demo to the noew validation ([e48c6a5](https://github.com/stumpam/ngx-cz-id/commit/e48c6a5b992656cee038799024054fd3a594ad92))
+* **lib:** add padStart function ([50fe167](https://github.com/stumpam/ngx-cz-id/commit/50fe167b200209e5b11eac65d82524887ecc2cc9))
+* **lib:** add validation for min and max age ([c9ff587](https://github.com/stumpam/ngx-cz-id/commit/c9ff587f9bedb12319481d74a763cc6be84fabe0))
+
+
+### Bug Fixes
+
+* **lib:** update library url ([2864b72](https://github.com/stumpam/ngx-cz-id/commit/2864b727a80af09be72d1efdbf9c997353de3cdc))
+
 ### [1.0.1](https://github.com/stumpam/ngx-cz-id/compare/v1.0.0...v1.0.1) (2020-03-07)
 
 
