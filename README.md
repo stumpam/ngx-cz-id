@@ -20,8 +20,10 @@ export class AppModule {}
 
 2. Use in HTML template
 
+- add attributes min or max to validate even age of person with current id
+
 ```typescript
-<ngx-cz-id [formControl]="ctrl"></ngx-cz-id>
+<ngx-cz-id [formControl]="ctrl" [min]="18" [max]="25"></ngx-cz-id>
 ```
 
 Automatically emits `invalidCzId` when length of string is valid but number is not valid id.
