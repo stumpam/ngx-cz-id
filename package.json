@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "release": "standard-version",
     "ng": "ng",
     "nx": "nx",
     "start": "ng serve",
@@ -29,7 +30,6 @@
   },
   "private": true,
   "dependencies": {
-    "@nrwl/angular": "9.0.4",
     "@angular/animations": "9.0.5",
     "@angular/common": "9.0.5",
     "@angular/compiler": "9.0.5",
@@ -38,7 +38,9 @@
     "@angular/platform-browser": "9.0.5",
     "@angular/platform-browser-dynamic": "9.0.5",
     "@angular/router": "9.0.5",
+    "@nrwl/angular": "9.0.4",
     "core-js": "^3.6.4",
+    "ngx-semantic-version": "^1.2.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.11.1",
     "zone.js": "^0.10.2"
@@ -65,6 +67,22 @@
     "@types/jest": "24.9.1",
     "ts-jest": "24.0.0",
     "cypress": "^3.8.2",
-    "@nrwl/cypress": "9.0.4"
+    "@nrwl/cypress": "9.0.4",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
+    "husky": "^3.0.9",
+    "standard-version": "^7.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
