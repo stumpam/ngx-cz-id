@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/stumpam/ngx-cz-id/compare/v1.0.0...v1.0.1) (2020-03-07)
+
+
+### Bug Fixes
+
+* **lib:** make lib available for pre VE ([eefe6b2](https://github.com/stumpam/ngx-cz-id/commit/eefe6b26801e9fb40881de1a892d04be040bcb54))
+
 ## 1.0.0 (2020-03-07)
 
 
