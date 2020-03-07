@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "1.0.1",
   "description": "Angular input for czech id (Rodné číslo) with validation.",
-  "homepage": "https://github.com/stumpam/ngx-date-input",
+  "homepage": "https://github.com/stumpam/ngx-cz-id",
   "author": "Martin Štumpa (https://github.com/stumpam)",
   "keywords": [
     "ng",
