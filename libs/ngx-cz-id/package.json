@@ -1,9 +1,28 @@
 {
-  "name": "@ngx-cz-id/ngx-cz-id",
-  "version": "0.0.1",
+  "name": "@stumpam/ngx-cz-id",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "Angular input for czech id (Rodné číslo) with validation.",
+  "homepage": "https://github.com/stumpam/ngx-date-input",
+  "author": "Martin Štumpa (https://github.com/stumpam)",
+  "keywords": [
+    "ng",
+    "angular",
+    "library",
+    "id",
+    "czech",
+    "rodné číslo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stumpam/ngx-cz-id"
+  },
+  "bugs": {
+    "url": "https://github.com/stumpam/ngx-cz-id/issues"
+  },
   "peerDependencies": {
-    "@angular/common": "^9.0.5",
-    "@angular/core": "^9.0.5",
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
     "tslib": "^1.10.0"
   }
 }
