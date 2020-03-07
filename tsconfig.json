@@ -16,8 +16,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngx-cz-id/ngx-cz-id": ["libs/ngx-cz-id/src/index.ts"]
+      "@stumpam/ngx-cz-id": ["libs/ngx-cz-id/src/index.ts"]
     }
+  },
+  "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true
   },
   "exclude": ["node_modules", "tmp"]
 }
