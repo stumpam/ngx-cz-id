@@ -17,6 +17,8 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
+import { padStart } from '../../functions/format.functions';
+
 const ID_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => IdInputComponent),
@@ -28,6 +30,8 @@ const ID_VALUE_VALIDATOR = {
   useExisting: forwardRef(() => IdInputComponent),
   multi: true,
 };
+
+const nextYear = new Date().getFullYear() - 1999;
 
 @Component({
   selector: 'ngx-cz-id',
@@ -46,6 +50,8 @@ const ID_VALUE_VALIDATOR = {
 export class IdInputComponent implements OnInit, ControlValueAccessor {
   @ViewChild('field', { static: true }) field: ElementRef<HTMLInputElement>;
   @Input() attributes = {};
+  @Input() min: number | undefined;
+  @Input() max: number | undefined;
 
   touchedFn: any = null;
   changeFn: any = null;
@@ -117,7 +123,7 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
         num,
     );
 
-    if (string.length === (+year < 54 ? 10 : 11)) {
+    if (string.length === (+year < 54 && +year > nextYear ? 10 : 11)) {
       if (this.prevValue !== string) {
         this.emitted = true;
         this.changeFn(string.replace('/', ''));
@@ -139,7 +145,7 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
       year,
       month: str?.slice(2, 4),
       day: str?.slice(4, 6),
-      num: str?.slice(6, +year < 54 ? 9 : 10),
+      num: str?.slice(6, +year < 54 && +year > nextYear ? 9 : 10),
     };
   }
 
@@ -158,24 +164,69 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
       return false;
     }
 
-    const dateYear = y > new Date().getFullYear() - 2000 ? '19' + y : '20' + y;
-    const dateMonth = m > 12 ? m - 50 : m;
+    const dateYear = this.convertYear(y);
+    const dateMonth = this.convertMonth(m);
 
     if (Number.isNaN(Date.parse(`${dateYear}-${dateMonth}-${day}`))) {
       return false;
     }
 
-    return y < 54 ? true : !((y + m + d + n) % 11);
+    return y < 54 && y > nextYear ? true : !((y + m + d + n) % 11);
+  }
+
+  convertYear(y: number): string {
+    return y > new Date().getFullYear() - 2000
+      ? '19' + padStart(y, 2)
+      : '20' + padStart(y, 2);
+  }
+
+  convertMonth(m: number): number {
+    return m > 12 ? m - 50 : m;
+  }
+
+  minValidate(year: string, month: string, day: string): boolean {
+    if (!this.min) return true;
+
+    return this.getAge(year, month, day) >= this.min;
+  }
+
+  maxValidate(year: string, month: string, day: string): boolean {
+    if (!this.max) return true;
+
+    return this.getAge(year, month, day) <= this.max;
+  }
+
+  getAge(year: string, month: string, day: string): number {
+    const dateYear = this.convertYear(+year);
+    const dateMonth = this.convertMonth(+month);
+
+    const today = new Date();
+    const date = new Date(`${dateYear}-${dateMonth}-${day}`);
+
+    const age = today.getFullYear() - date.getFullYear();
+    const m = today.getMonth() - date.getMonth();
+
+    return m < 0 || (m === 0 && today.getDate() < date.getDate())
+      ? age - 1
+      : age;
   }
 
   validate({ value }: FormControl) {
     const { year, month, day, num } = this.splitIdString(value);
     const isNotValid = !(this.emitted && this.checkId(year, month, day, num));
+    const isNotMinValid = !(this.emitted && this.minValidate(year, month, day));
+    const isNotMaxValid = !(this.emitted && this.maxValidate(year, month, day));
 
-    return (
-      isNotValid && {
+    return {
+      ...(isNotValid && {
         invalidCzId: true,
-      }
-    );
+      }),
+      ...(isNotMinValid && {
+        invalidMinCzId: true,
+      }),
+      ...(isNotMaxValid && {
+        invalidMaxCzId: true,
+      }),
+    };
   }
 }
