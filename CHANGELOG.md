@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/stumpam/ngx-cz-id/compare/v1.1.0...v1.2.0) (2020-03-09)
+
+
+### Features
+
+* **demo:** add formly demo ([c247079](https://github.com/stumpam/ngx-cz-id/commit/c247079d7b4aa1078ed11af04ab26f296636155a))
+* **demo:** update demo app ([24cd813](https://github.com/stumpam/ngx-cz-id/commit/24cd813871895b0e9790d54408e18e4f59689924))
+
+
+### Bug Fixes
+
+* **lib:** fix error only after blur and null on deletion ([393cf7e](https://github.com/stumpam/ngx-cz-id/commit/393cf7e40c38a8e4748211a8e77f42a3f9f4f882)), closes [#1](https://github.com/stumpam/ngx-cz-id/issues/1) [#2](https://github.com/stumpam/ngx-cz-id/issues/2) [#3](https://github.com/stumpam/ngx-cz-id/issues/3)
+
 ## [1.1.0](https://github.com/stumpam/ngx-cz-id/compare/v1.0.1...v1.1.0) (2020-03-07)
 
 
