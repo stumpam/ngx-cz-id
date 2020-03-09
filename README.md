@@ -23,7 +23,14 @@ export class AppModule {}
 - add attributes min or max to validate even age of person with current id
 
 ```typescript
-<ngx-cz-id [formControl]="ctrl" [min]="18" [max]="25"></ngx-cz-id>
+<ngx-cz-id [formControl]="ctrl" [min]="18" [max]="25" [options]="options"></ngx-cz-id>
+```
+3. Optional options to emit only valid cz id value
+
+```typescript
+options: {
+  emitInvalid: false;
+}
 ```
 
 Automatically emits `invalidCzId` when length of string is valid but number is not valid id.
@@ -44,7 +51,7 @@ ngOnInit() {
 and use it in the template
 
 ```HTML
-<ngx-cz-id [formControl]="formControl"  [attributes]="attributes"></ngx-cz-id>
+<ngx-cz-id [formControl]="formControl" [options]="to.czIdOptions [attributes]="attributes"></ngx-cz-id>
 ```
 
 > ⚠ Caution
