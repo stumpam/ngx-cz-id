@@ -1,0 +1,7 @@
+<ngx-cz-id [formControl]="formControl" [options]="to.czIdOptions" [attributes]="attributes" (blurred)="blur = true"></ngx-cz-id>
+
+<div *ngIf="showError && blur" class="invalid-feedback" [style.display]="'block'">
+  <formly-validation-message [field]="field"></formly-validation-message>
+</div>
+
+{{ showError }}
