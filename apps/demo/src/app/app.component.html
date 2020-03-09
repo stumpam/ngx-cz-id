@@ -9,4 +9,8 @@
 <main>
   <ngx-cz-id [formControl]="ctrl"></ngx-cz-id>
   <ngx-cz-id [formControl]="ctrl2" [min]="18"></ngx-cz-id>
+
+  <form [formGroup]="form">
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+  </form>
 </main>
