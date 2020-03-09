@@ -3,9 +3,11 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
   ViewEncapsulation,
@@ -18,6 +20,7 @@ import {
 } from '@angular/forms';
 
 import { padStart } from '../../functions/format.functions';
+import { CzIdOptions } from '../../interfaces/cz-id.interface';
 
 const ID_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -52,11 +55,14 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
   @Input() attributes = {};
   @Input() min: number | undefined;
   @Input() max: number | undefined;
+  @Input() options: CzIdOptions;
+
+  @Output() blurred = new EventEmitter();
 
   touchedFn: any = null;
   changeFn: any = null;
   disabled = false;
-  emitted = false;
+  emitted = null;
 
   prevValue = '';
 
@@ -101,7 +107,11 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
 
     if (!id) {
       this.updateView('');
-      this.emitted = false;
+
+      if (this.emitted !== null) {
+        this.emitted = null;
+        this.changeFn?.(null);
+      }
 
       return;
     }
@@ -124,13 +134,21 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
     );
 
     if (string.length === (+year < 54 && +year > nextYear ? 10 : 11)) {
-      if (this.prevValue !== string) {
-        this.emitted = true;
-        this.changeFn(string.replace('/', ''));
+      if (this.emitted !== value) {
+        this.emitted = value;
+        const str = string.replace('/', '');
+
+        this.changeFn?.(
+          !this.options?.emitInvalid
+            ? this.checkId(year, month, day, num)
+              ? str
+              : null
+            : str,
+        );
       }
-    } else if (this.emitted === true) {
-      this.emitted = false;
-      this.changeFn(null);
+    } else if (this.emitted) {
+      this.emitted = null;
+      this.changeFn?.(null);
     }
     this.prevValue = string;
   }

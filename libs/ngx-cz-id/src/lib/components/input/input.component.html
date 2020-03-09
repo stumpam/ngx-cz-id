@@ -1,1 +1,1 @@
-<input type="text" #field [disabled]="disabled">
+<input type="text" #field [disabled]="disabled" (blur)="blurred.emit()">
