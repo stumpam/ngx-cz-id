@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/stumpam/ngx-cz-id/compare/v1.2.0...v2.0.0) (2020-05-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lib:** Now you must use cz-id as directive on input element. No longer it is available as standalone component
+
+### Features
+
+* **lib:** move cz-id form input component to directive ([d8a3b0d](https://github.com/stumpam/ngx-cz-id/commit/d8a3b0db4142845d59caad253e657d9a777d735e))
+
+
+### Bug Fixes
+
+* **lib:** id was not validating correctly in Safari and IE ([83c9a74](https://github.com/stumpam/ngx-cz-id/commit/83c9a740d19ef60b1f1db867d7862bc085845f4e))
+
 ## [1.2.0](https://github.com/stumpam/ngx-cz-id/compare/v1.1.0...v1.2.0) (2020-03-09)
 
 
