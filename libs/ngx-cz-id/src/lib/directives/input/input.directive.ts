@@ -1,16 +1,10 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Directive,
   ElementRef,
-  EventEmitter,
   forwardRef,
   Input,
-  OnInit,
-  Output,
   Renderer2,
-  ViewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -24,40 +18,32 @@ import { CzIdOptions } from '../../interfaces/cz-id.interface';
 
 const ID_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => IdInputComponent),
+  useExisting: forwardRef(() => IdInputDirective),
   multi: true,
 };
 
 const ID_VALUE_VALIDATOR = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => IdInputComponent),
+  useExisting: forwardRef(() => IdInputDirective),
   multi: true,
 };
 
 const nextYear = new Date().getFullYear() - 1999;
 
-@Component({
-  selector: 'ngx-cz-id',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+@Directive({
+  selector: '[ngxCzId]',
   // tslint:disable-next-line: no-host-metadata-property
   host: {
     '(click)': 'onClick()',
     '(input)': 'onInput($event.target.value)',
     '[class.ngx-date-input]': 'true',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ID_VALUE_ACCESSOR, ID_VALUE_VALIDATOR],
 })
-export class IdInputComponent implements OnInit, ControlValueAccessor {
-  @ViewChild('field', { static: true }) field: ElementRef<HTMLInputElement>;
-  @Input() attributes = {};
+export class IdInputDirective implements ControlValueAccessor {
   @Input() min: number | undefined;
   @Input() max: number | undefined;
   @Input() options: CzIdOptions;
-
-  @Output() blurred = new EventEmitter();
 
   touchedFn: any = null;
   changeFn: any = null;
@@ -69,17 +55,8 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
   constructor(
     private readonly cd: ChangeDetectorRef,
     private readonly renderer: Renderer2,
+    private readonly el: ElementRef<HTMLInputElement>,
   ) {}
-
-  ngOnInit(): void {
-    Object.entries(this.attributes).forEach(([attr, value]) => {
-      this.renderer.setAttribute(
-        this.field.nativeElement,
-        attr,
-        value.toString(),
-      );
-    });
-  }
 
   writeValue(val: string | null): void {
     this.onInput(val);
@@ -154,7 +131,7 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
   }
 
   updateView(string: string) {
-    this.renderer.setProperty(this.field.nativeElement, 'value', string);
+    this.renderer.setProperty(this.el.nativeElement, 'value', string);
   }
 
   splitIdString(str: string) {
