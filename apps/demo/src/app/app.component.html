@@ -7,8 +7,8 @@
   <h1>Welcome to {{ title }}!</h1>
 </header>
 <main>
-  <ngx-cz-id [formControl]="ctrl"></ngx-cz-id>
-  <ngx-cz-id [formControl]="ctrl2" [min]="18"></ngx-cz-id>
+  <input ngxCzId [formControl]="ctrl" />
+  <input ngxCzId [formControl]="ctrl2" [min]="18" />
 
   <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>

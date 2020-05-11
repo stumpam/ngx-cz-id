@@ -1,6 +1,16 @@
-<ngx-cz-id [formControl]="formControl" [options]="to.czIdOptions" [attributes]="attributes" (blurred)="blur = true"></ngx-cz-id>
+<input
+  ngxCzId
+  [formControl]="formControl"
+  [options]="to.czIdOptions"
+  [formlyAttributes]="to.attributes"
+  (blur)="blur = true"
+/>
 
-<div *ngIf="showError && blur" class="invalid-feedback" [style.display]="'block'">
+<div
+  *ngIf="showError && blur"
+  class="invalid-feedback"
+  [style.display]="'block'"
+>
   <formly-validation-message [field]="field"></formly-validation-message>
 </div>
 

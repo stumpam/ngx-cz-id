@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
@@ -14,21 +13,11 @@ import { FieldType } from '@ngx-formly/core';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormlyComponent extends FieldType implements OnInit {
+export class FormlyComponent extends FieldType {
   attributes = {};
   blur = false;
 
   constructor(private readonly cd: ChangeDetectorRef) {
     super();
-  }
-
-  ngOnInit() {
-    this.attributes = {
-      id: this.id,
-      ...this.to.attributes,
-    };
-    
-    this.formControl.valueChanges.subscribe(() => {
-    });
   }
 }
