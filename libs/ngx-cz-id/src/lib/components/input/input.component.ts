@@ -198,8 +198,12 @@ export class IdInputComponent implements OnInit, ControlValueAccessor {
       : '20' + padStart(y, 2);
   }
 
-  convertMonth(m: number): number {
-    return m > 12 ? m - 50 : m;
+  convertMonth(m: number): string {
+    let month = `${m > 12 ? m - 50 : m}`;
+    if (m < 10) {
+      month = `0${m}`;
+    }
+    return month;
   }
 
   minValidate(year: string, month: string, day: string): boolean {
