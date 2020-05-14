@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/stumpam/ngx-cz-id/compare/v2.0.0...v2.1.0) (2020-05-14)
+
+
+### Features
+
+* **lib:** addd emit all option ([a9b8bf1](https://github.com/stumpam/ngx-cz-id/commit/a9b8bf144e8a4c222e3e0a6b7126982a267d7628))
+
 ## [2.0.0](https://github.com/stumpam/ngx-cz-id/compare/v1.2.0...v2.0.0) (2020-05-11)
 
 
