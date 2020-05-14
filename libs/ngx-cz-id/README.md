@@ -31,6 +31,8 @@ export class AppModule {}
 ```typescript
 options: {
   emitInvalid: false;
+  // emits all typed characters not just valid / invalid complete id
+  emitAll: boolean;
 }
 ```
 
