@@ -110,6 +110,12 @@ export class IdInputDirective implements ControlValueAccessor {
         num,
     );
 
+    if (this.options?.emitAll) {
+      this.changeFn?.(string.replace('/', ''));
+
+      return;
+    }
+
     if (string.length === (+year < 54 && +year > nextYear ? 10 : 11)) {
       if (this.emitted !== value) {
         this.emitted = value;
@@ -212,9 +218,19 @@ export class IdInputDirective implements ControlValueAccessor {
 
   validate({ value }: FormControl) {
     const { year, month, day, num } = this.splitIdString(value);
-    const isNotValid = !(this.emitted && this.checkId(year, month, day, num));
-    const isNotMinValid = !(this.emitted && this.minValidate(year, month, day));
-    const isNotMaxValid = !(this.emitted && this.maxValidate(year, month, day));
+
+    const isNotValid = !(
+      (this.options?.emitAll || this.emitted) &&
+      this.checkId(year, month, day, num)
+    );
+    const isNotMinValid = !(
+      (this.options?.emitAll || this.emitted) &&
+      this.minValidate(year, month, day)
+    );
+    const isNotMaxValid = !(
+      (this.options?.emitAll || this.emitted) &&
+      this.maxValidate(year, month, day)
+    );
 
     return {
       ...(isNotValid && {
