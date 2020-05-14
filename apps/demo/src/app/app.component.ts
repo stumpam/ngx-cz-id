@@ -1,11 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { CzIdOptions } from '@stumpam/ngx-cz-id';
 
 @Component({
   selector: 'ngx-cz-id-root',
@@ -18,6 +14,9 @@ export class AppComponent implements OnInit {
 
   ctrl = new FormControl('');
   ctrl2 = new FormControl('');
+  ctrl3 = new FormControl('');
+
+  options: CzIdOptions = { emitAll: true };
 
   form = new FormGroup({});
   model = {};
@@ -33,8 +32,8 @@ export class AppComponent implements OnInit {
           autocomplete: 'off',
         },
         czIdOptions: {
-          emitInvalid: false
-        }
+          emitInvalid: false,
+        },
       },
     },
   ];
@@ -45,6 +44,9 @@ export class AppComponent implements OnInit {
     );
     this.ctrl2.valueChanges.subscribe(val =>
       console.log('appCmp2: ', val, this.ctrl2.errors),
+    );
+    this.ctrl3.valueChanges.subscribe(val =>
+      console.log('appCmp2: ', val, this.ctrl3.errors),
     );
     this.form.valueChanges.subscribe(val =>
       console.log('formly: ', val, this.form.errors),

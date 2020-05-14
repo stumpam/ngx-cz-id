@@ -9,6 +9,7 @@
 <main>
   <input ngxCzId [formControl]="ctrl" />
   <input ngxCzId [formControl]="ctrl2" [min]="18" />
+  <input ngxCzId [formControl]="ctrl3" [options]="options" [min]="50" />
 
   <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
