@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/stumpam/ngx-cz-id/compare/v2.1.0...v2.1.1) (2020-05-20)
+
+
+### Bug Fixes
+
+* **lib:** month is not correctly prepended with 0 ([8441092](https://github.com/stumpam/ngx-cz-id/commit/84410924e1bc966ef8fdfe21d6b034dd1d2f3b70))
+
 ## [2.1.0](https://github.com/stumpam/ngx-cz-id/compare/v2.0.0...v2.1.0) (2020-05-14)
 
 
