@@ -182,11 +182,8 @@ export class IdInputDirective implements ControlValueAccessor {
   }
 
   convertMonth(m: number): string {
-    let month = `${m > 12 ? m - 50 : m}`;
-    if (m < 10) {
-      month = `0${m}`;
-    }
-    return month;
+    const month = m > 12 ? m - 50 : m;
+    return padStart(month, 2);
   }
 
   minValidate(year: string, month: string, day: string): boolean {
