@@ -158,7 +158,12 @@ export class IdInputDirective implements ControlValueAccessor {
 
     if (
       !(y >= 0 && y <= 99) ||
-      !((m >= 1 && m <= 12) || (m >= 51 && m <= 62)) ||
+      !(
+        (m >= 1 && m <= 12) ||
+        (m >= 21 && m <= 32) ||
+        (m >= 51 && m <= 62) ||
+        (m >= 71 && m <= 82)
+      ) ||
       !(d >= 1 && d <= 31) ||
       !(n >= 0 && n <= 9999)
     ) {
@@ -172,7 +177,14 @@ export class IdInputDirective implements ControlValueAccessor {
       return false;
     }
 
-    return y < 54 && y > nextYear ? true : !((y + m + d + n) % 11);
+    return y < 54 && y > nextYear ? true : this.checkSum(year, month, day, num);
+  }
+
+  checkSum(year: string, month: string, day: string, num: string): boolean {
+    const mod = +`${year}${month}${day}${num.slice(0, 3)}` % 11;
+    const lastNum = parseInt(num.slice(3), 10);
+
+    return mod === 10 ? lastNum === 0 : lastNum === mod;
   }
 
   convertYear(y: number): string {
@@ -182,7 +194,20 @@ export class IdInputDirective implements ControlValueAccessor {
   }
 
   convertMonth(m: number): string {
-    const month = m > 12 ? m - 50 : m;
+    let month = m;
+    switch (true) {
+      case m >= 1 && m <= 12:
+        month = m;
+        break;
+      case m >= 21 && m <= 32:
+        month = m - 20;
+        break;
+      case m >= 51 && m <= 62:
+        month = m - 50;
+        break;
+      case m >= 71 && m <= 82:
+        month = m - 70;
+    }
     return padStart(month);
   }
 
