@@ -168,7 +168,7 @@ export class IdInputDirective implements ControlValueAccessor {
     const dateYear = this.convertYear(y);
     const dateMonth = this.convertMonth(m);
 
-    if (Number.isNaN(Date.parse(`${dateYear}-${dateMonth}-${day}`))) {
+    if (Number.isNaN(Date.parse(`${dateYear}-${dateMonth}-${padStart(day)}`))) {
       return false;
     }
 
@@ -177,13 +177,13 @@ export class IdInputDirective implements ControlValueAccessor {
 
   convertYear(y: number): string {
     return y > new Date().getFullYear() - 2000
-      ? '19' + padStart(y, 2)
-      : '20' + padStart(y, 2);
+      ? '19' + padStart(y)
+      : '20' + padStart(y);
   }
 
   convertMonth(m: number): string {
     const month = m > 12 ? m - 50 : m;
-    return padStart(month, 2);
+    return padStart(month);
   }
 
   minValidate(year: string, month: string, day: string): boolean {

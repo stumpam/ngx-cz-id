@@ -1,8 +1,4 @@
-export const padStart = (
-  str: string | number,
-  length: number,
-  char: string = '0',
-) => {
+export const padStart = (str: string | number, length = 2, char = '0') => {
   str = str.toString();
 
   return str.length < length
