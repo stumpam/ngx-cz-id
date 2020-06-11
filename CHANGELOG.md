@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/stumpam/ngx-cz-id/compare/v2.1.1...v2.1.2) (2020-06-11)
+
+
+### Bug Fixes
+
+* **lib:** update adding of leading zero ([c334b98](https://github.com/stumpam/ngx-cz-id/commit/c334b984306070c8531e1d78d58eb1709bed5e5f))
+* **lib:** update correct algorithm ([b229f32](https://github.com/stumpam/ngx-cz-id/commit/b229f32077d16e49cf4158908dcb36f1835da9fa))
+
 ### [2.1.1](https://github.com/stumpam/ngx-cz-id/compare/v2.1.0...v2.1.1) (2020-05-20)
 
 
