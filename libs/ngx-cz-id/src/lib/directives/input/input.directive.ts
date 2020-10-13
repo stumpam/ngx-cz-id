@@ -44,6 +44,7 @@ export class IdInputDirective implements ControlValueAccessor {
   @Input() min: number | undefined;
   @Input() max: number | undefined;
   @Input() options: CzIdOptions;
+  @Input() required: boolean;
 
   touchedFn: any = null;
   changeFn: any = null;
@@ -111,7 +112,10 @@ export class IdInputDirective implements ControlValueAccessor {
     );
 
     if (this.options?.emitAll) {
-      this.changeFn?.(string.replace('/', ''));
+      const allValue = string.replace('/', '');
+      this.emitted = allValue;
+      this.changeFn?.(allValue);
+      this.prevValue = string;
 
       return;
     }
@@ -239,6 +243,8 @@ export class IdInputDirective implements ControlValueAccessor {
   }
 
   validate({ value }: FormControl) {
+    if (!value && !this.required) return null;
+
     const { year, month, day, num } = this.splitIdString(value);
 
     const isNotValid = !(
