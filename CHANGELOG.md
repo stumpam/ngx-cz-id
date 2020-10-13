@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.3](https://github.com/stumpam/ngx-cz-id/compare/v2.1.2...v2.1.3) (2020-10-13)
+
+
+### Bug Fixes
+
+* **lib:** non required field will not block form submit ([bf5a050](https://github.com/stumpam/ngx-cz-id/commit/bf5a050ad9a3951950cf7eee7f18b4ee07684a74))
+
 ### [2.1.2](https://github.com/stumpam/ngx-cz-id/compare/v2.1.1...v2.1.2) (2020-06-11)
 
 

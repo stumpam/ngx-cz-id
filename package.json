@@ -1,6 +1,6 @@
 {
   "name": "ngx-cz-id",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "license": "MIT",
   "scripts": {
     "release": "standard-version",
