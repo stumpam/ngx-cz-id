@@ -13,7 +13,12 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
-import { padStart } from '../../functions/format.functions';
+import {
+  checkId,
+  convertMonth,
+  convertYear,
+  splitIdString,
+} from '../../functions/check.functions';
 import { CzIdOptions } from '../../interfaces/cz-id.interface';
 
 const ID_VALUE_ACCESSOR: any = {
@@ -96,7 +101,7 @@ export class IdInputDirective implements ControlValueAccessor {
 
     const arr = id.join('');
 
-    const { year, month, day, num } = this.splitIdString(arr);
+    const { year, month, day, num } = splitIdString(arr);
 
     const string = year + month + day + (day.length === 2 ? '/' : '') + num;
 
@@ -127,7 +132,7 @@ export class IdInputDirective implements ControlValueAccessor {
 
         this.changeFn?.(
           !this.options?.emitInvalid
-            ? this.checkId(year, month, day, num)
+            ? checkId(year, month, day, num)
               ? str
               : null
             : str,
@@ -144,77 +149,6 @@ export class IdInputDirective implements ControlValueAccessor {
     this.renderer.setProperty(this.el.nativeElement, 'value', string);
   }
 
-  splitIdString(str: string) {
-    const year = str?.slice(0, 2);
-    return {
-      year,
-      month: str?.slice(2, 4),
-      day: str?.slice(4, 6),
-      num: str?.slice(6, +year < 54 && +year > nextYear ? 9 : 10),
-    };
-  }
-
-  checkId(year: string, month: string, day: string, num: string): boolean {
-    const y = +year;
-    const m = +month;
-    const d = +day;
-    const n = +num;
-
-    if (
-      !(y >= 0 && y <= 99) ||
-      !(
-        (m >= 1 && m <= 12) ||
-        (m >= 21 && m <= 32) ||
-        (m >= 51 && m <= 62) ||
-        (m >= 71 && m <= 82)
-      ) ||
-      !(d >= 1 && d <= 31) ||
-      !(n >= 0 && n <= 9999)
-    ) {
-      return false;
-    }
-
-    const dateYear = this.convertYear(y);
-    const dateMonth = this.convertMonth(m);
-
-    if (Number.isNaN(Date.parse(`${dateYear}-${dateMonth}-${padStart(day)}`))) {
-      return false;
-    }
-
-    return y < 54 && y > nextYear ? true : this.checkSum(year, month, day, num);
-  }
-
-  checkSum(year: string, month: string, day: string, num: string): boolean {
-    const mod = +`${year}${month}${day}${num.slice(0, 3)}` % 11;
-    const lastNum = parseInt(num.slice(3), 10);
-
-    return mod === 10 ? lastNum === 0 : lastNum === mod;
-  }
-
-  convertYear(y: number): string {
-    return y > new Date().getFullYear() - 2000
-      ? '19' + padStart(y)
-      : '20' + padStart(y);
-  }
-
-  convertMonth(m: number): string {
-    let month = m;
-    switch (true) {
-      case m >= 1 && m <= 12:
-        month = m;
-        break;
-      case m >= 21 && m <= 32:
-        month = m - 20;
-        break;
-      case m >= 51 && m <= 62:
-        month = m - 50;
-        break;
-      case m >= 71 && m <= 82:
-        month = m - 70;
-    }
-    return padStart(month);
-  }
-
   minValidate(year: string, month: string, day: string): boolean {
     if (!this.min) return true;
 
@@ -228,8 +162,8 @@ export class IdInputDirective implements ControlValueAccessor {
   }
 
   getAge(year: string, month: string, day: string): number {
-    const dateYear = this.convertYear(+year);
-    const dateMonth = this.convertMonth(+month);
+    const dateYear = convertYear(+year);
+    const dateMonth = convertMonth(+month);
 
     const today = new Date();
     const date = new Date(`${dateYear}-${dateMonth}-${day}`);
@@ -245,11 +179,11 @@ export class IdInputDirective implements ControlValueAccessor {
   validate({ value }: FormControl) {
     if (!value && !this.required) return null;
 
-    const { year, month, day, num } = this.splitIdString(value);
+    const { year, month, day, num } = splitIdString(value);
 
     const isNotValid = !(
       (this.options?.emitAll || this.emitted) &&
-      this.checkId(year, month, day, num)
+      checkId(year, month, day, num)
     );
     const isNotMinValid = !(
       (this.options?.emitAll || this.emitted) &&
