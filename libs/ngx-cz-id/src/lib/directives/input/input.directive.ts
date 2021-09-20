@@ -39,7 +39,7 @@ const nextYear = new Date().getFullYear() - 1999;
   selector: '[ngxCzId]',
   // tslint:disable-next-line: no-host-metadata-property
   host: {
-    '(blur)': 'onClick()',
+    '(blur)': 'onBlur()',
     '(input)': 'onInput($event.target.value)',
     '[class.ngx-date-input]': 'true',
   },
@@ -87,7 +87,7 @@ export class IdInputDirective implements ControlValueAccessor {
     this.cd.markForCheck();
   }
 
-  onClick() {
+  onBlur() {
     this.touchedFn?.();
   }
 
