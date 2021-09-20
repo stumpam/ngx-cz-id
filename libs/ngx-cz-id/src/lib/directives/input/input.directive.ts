@@ -50,6 +50,12 @@ export class IdInputDirective implements ControlValueAccessor {
   @Input() max: number | undefined;
   @Input() options: CzIdOptions;
   @Input() required: boolean;
+  /**
+   * Validation uses your RegExp and min/max validation for age.
+   * Validation for correctness of ID (Rodné číslo) is turned off,
+   * when exceptions are set.
+   */
+  @Input() exception?: RegExp;
 
   touchedFn: any = null;
   changeFn: any = null;
@@ -194,10 +200,15 @@ export class IdInputDirective implements ControlValueAccessor {
       this.maxValidate(year, month, day)
     );
 
+    const exceptionValidation = this.exception
+      ? this.exception.test(value)
+      : null;
+
     return {
-      ...(isNotValid && {
-        invalidCzId: true,
-      }),
+      ...(isNotValid &&
+        !exceptionValidation && {
+          invalidCzId: true,
+        }),
       ...(isNotMinValid && {
         invalidMinCzId: true,
       }),
