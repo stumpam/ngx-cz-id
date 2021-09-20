@@ -10,6 +10,14 @@
   <input ngxCzId [formControl]="ctrl" />
   <input ngxCzId [formControl]="ctrl2" [min]="18" />
   <input ngxCzId [formControl]="ctrl3" [options]="options" [min]="50" />
+  ex:
+  <input
+    ngxCzId
+    [formControl]="ctrl4"
+    [options]="options"
+    [min]="50"
+    [exception]="exception"
+  />
 
   <form [formGroup]="form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>

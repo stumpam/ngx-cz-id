@@ -15,8 +15,11 @@ export class AppComponent implements OnInit {
   ctrl = new FormControl('');
   ctrl2 = new FormControl('');
   ctrl3 = new FormControl('');
+  ctrl4 = new FormControl('');
 
   options: CzIdOptions = { emitAll: true };
+
+  exception = /^[0-9]{6}9999$/;
 
   form = new FormGroup({});
   model = {};
@@ -46,7 +49,10 @@ export class AppComponent implements OnInit {
       console.log('appCmp2: ', val, this.ctrl2.errors),
     );
     this.ctrl3.valueChanges.subscribe(val =>
-      console.log('appCmp2: ', val, this.ctrl3.errors),
+      console.log('appCmp3: ', val, this.ctrl3.errors),
+    );
+    this.ctrl4.valueChanges.subscribe(val =>
+      console.log('appCmp4: ', val, this.ctrl4.errors),
     );
     this.form.valueChanges.subscribe(val =>
       console.log('formly: ', val, this.form.errors),
