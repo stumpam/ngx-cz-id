@@ -23,8 +23,10 @@ export class AppModule {}
 - add attributes min or max to validate even age of person with current id
 
 ```HTML
-<input ngxCzId [formControl]="ctrl" [min]="18" [max]="25" [options]="options">
+<input ngxCzId [formControl]="ctrl" [min]="18" [max]="25" [options]="options" [exception]="exception">
 ```
+
+Exception accepts regexp which can bypass validation of ID (rodné číslo) in cases where is needed invalid ID (010101/9999). It still validates min/max ages.
 
 3. Optional options to emit only valid cz id value
 
