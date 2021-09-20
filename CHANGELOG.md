@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/stumpam/ngx-cz-id/compare/v2.2.0...v2.3.0) (2021-09-20)
+
+
+### Features
+
+* add exceptions to the validation ([7b7d62e](https://github.com/stumpam/ngx-cz-id/commit/7b7d62e13cdf6904319c23233533e6a54d74996e))
+
 ## [2.2.0](https://github.com/stumpam/ngx-cz-id/compare/v2.1.3...v2.2.0) (2021-05-07)
 
 
