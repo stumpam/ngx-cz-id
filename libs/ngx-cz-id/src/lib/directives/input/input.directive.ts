@@ -39,7 +39,7 @@ const nextYear = new Date().getFullYear() - 1999;
   selector: '[ngxCzId]',
   // tslint:disable-next-line: no-host-metadata-property
   host: {
-    '(click)': 'onClick()',
+    '(blur)': 'onClick()',
     '(input)': 'onInput($event.target.value)',
     '[class.ngx-date-input]': 'true',
   },
