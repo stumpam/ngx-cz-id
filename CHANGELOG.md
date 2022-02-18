@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/stumpam/ngx-cz-id/compare/v3.0.0...v3.0.1) (2022-02-18)
+
+
+### Bug Fixes
+
+* update lib config ([d35134d](https://github.com/stumpam/ngx-cz-id/commit/d35134d3ee6f796cf661d46e273e65a04ad5838a))
+
 ## [3.0.0](https://github.com/stumpam/ngx-cz-id/compare/v2.3.1...v3.0.0) (2022-02-18)
 
 
