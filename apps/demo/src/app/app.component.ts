@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ctrl3 = new FormControl('');
   ctrl4 = new FormControl('');
 
-  options: CzIdOptions = { emitAll: true };
+  options: CzIdOptions = { emitAll: true, replaceSlashOnCopy: false };
 
   exception = /^[0-9]{6}9999$/;
 
