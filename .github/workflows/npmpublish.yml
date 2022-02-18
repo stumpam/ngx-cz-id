@@ -11,11 +11,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 17
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm run build ngx-cz-id
-      - run: npm publish dist/libs/ngx-cz-id --access public
+      - run: yarn
+      - run: yarn build ngx-cz-id
+      - run: yarn publish dist/libs/ngx-cz-id --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
@@ -25,10 +25,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 17
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - run: npm run build ngx-cz-id
-      - run: npm publish dist/libs/ngx-cz-id
+      - run: yarn
+      - run: yarn build ngx-cz-id
+      - run: yarn publish dist/libs/ngx-cz-id
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

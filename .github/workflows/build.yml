@@ -16,6 +16,6 @@ jobs:
     - name: Run node
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
-    - run: npm ci
-    - run: npm run build ngx-cz-id
+        node-version: '17'
+    - run: yarn
+    - run: yarn build ngx-cz-id
