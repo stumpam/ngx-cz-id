@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/stumpam/ngx-cz-id/compare/v2.3.1...v3.0.0) (2022-02-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Default behavior of Ctrl+C will copy ID without slash
+
+### Features
+
+* add copy without slash ([888f5af](https://github.com/stumpam/ngx-cz-id/commit/888f5af06aaf8b2b0948685ca243b1c60ad01d63))
+
 ### [2.3.1](https://github.com/stumpam/ngx-cz-id/compare/v2.3.0...v2.3.1) (2021-09-20)
 
 
