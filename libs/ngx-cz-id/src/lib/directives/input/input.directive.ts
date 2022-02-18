@@ -4,6 +4,9 @@ import {
   ElementRef,
   forwardRef,
   Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
   Renderer2,
 } from '@angular/core';
 import {
@@ -12,6 +15,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { fromEvent, Subscription } from 'rxjs';
 
 import {
   checkId,
@@ -45,7 +49,9 @@ const nextYear = new Date().getFullYear() - 1999;
   },
   providers: [ID_VALUE_ACCESSOR, ID_VALUE_VALIDATOR],
 })
-export class IdInputDirective implements ControlValueAccessor {
+export class IdInputDirective
+  implements ControlValueAccessor, OnInit, OnDestroy
+{
   @Input() min: number | undefined;
   @Input() max: number | undefined;
   @Input() options: CzIdOptions;
@@ -64,11 +70,30 @@ export class IdInputDirective implements ControlValueAccessor {
 
   prevValue = '';
 
+  subscriptions = new Subscription();
+
   constructor(
     private readonly cd: ChangeDetectorRef,
     private readonly renderer: Renderer2,
     private readonly el: ElementRef<HTMLInputElement>,
+    private readonly zone: NgZone,
   ) {}
+
+  ngOnInit(): void {
+    if (this.options?.replaceSlashOnCopy !== false) {
+      this.zone.runOutsideAngular(() => {
+        const sub = fromEvent(this.el.nativeElement, 'copy').subscribe(
+          (event: ClipboardEvent) => {
+            const text = window.getSelection().toString().replace(/\//g, '');
+            event.clipboardData.setData('text/plain', text);
+            event.preventDefault();
+          },
+        );
+
+        this.subscriptions.add(sub);
+      });
+    }
+  }
 
   writeValue(val: string | null): void {
     this.onInput(val);
@@ -216,5 +241,9 @@ export class IdInputDirective implements ControlValueAccessor {
         invalidMaxCzId: true,
       }),
     };
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
