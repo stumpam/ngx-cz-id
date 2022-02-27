@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectorRef,
   Directive,
@@ -41,11 +42,9 @@ const nextYear = new Date().getFullYear() - 1999;
 
 @Directive({
   selector: '[ngxCzId]',
-  // tslint:disable-next-line: no-host-metadata-property
   host: {
     '(blur)': 'onBlur()',
     '(input)': 'onInput($event.target.value)',
-    '[class.ngx-date-input]': 'true',
   },
   providers: [ID_VALUE_ACCESSOR, ID_VALUE_VALIDATOR],
 })
@@ -55,13 +54,21 @@ export class IdInputDirective
   @Input() min: number | undefined;
   @Input() max: number | undefined;
   @Input() options: CzIdOptions;
-  @Input() required: boolean;
   /**
    * Validation uses your RegExp and min/max validation for age.
    * Validation for correctness of ID (Rodné číslo) is turned off,
    * when exceptions are set.
    */
   @Input() exception?: RegExp;
+
+  @Input()
+  get required(): boolean {
+    return this.#required;
+  }
+  set required(search: BooleanInput) {
+    this.#required = coerceBooleanProperty(search);
+  }
+  #required = false;
 
   touchedFn: any = null;
   changeFn: any = null;
