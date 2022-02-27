@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.3](https://github.com/stumpam/ngx-cz-id/compare/v3.0.2...v3.0.3) (2022-02-27)
+
+
+### Bug Fixes
+
+* required input is correctly parsed ([f54726b](https://github.com/stumpam/ngx-cz-id/commit/f54726bd998a4b0e5c6b5040950583c6bf26661f))
+
 ### [3.0.2](https://github.com/stumpam/ngx-cz-id/compare/v3.0.1...v3.0.2) (2022-02-18)
 
 ### [3.0.1](https://github.com/stumpam/ngx-cz-id/compare/v3.0.0...v3.0.1) (2022-02-18)
