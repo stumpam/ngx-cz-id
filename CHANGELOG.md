@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.4](https://github.com/stumpam/ngx-cz-id/compare/v3.0.3...v3.0.4) (2022-03-03)
+
+
+### Bug Fixes
+
+* update for stricker typescript config ([7c4e246](https://github.com/stumpam/ngx-cz-id/commit/7c4e24665fd27e7354e98a61a1da31e01a7c048e))
+
 ### [3.0.3](https://github.com/stumpam/ngx-cz-id/compare/v3.0.2...v3.0.3) (2022-02-27)
 
 
