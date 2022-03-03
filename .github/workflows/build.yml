@@ -18,4 +18,4 @@ jobs:
       with:
         node-version: '17'
     - run: yarn
-    - run: yarn build ngx-cz-id
+    - run: yarn build ngx-cz-id --prod

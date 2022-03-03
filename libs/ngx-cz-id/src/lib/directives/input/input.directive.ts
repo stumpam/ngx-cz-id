@@ -53,7 +53,7 @@ export class IdInputDirective
 {
   @Input() min: number | undefined;
   @Input() max: number | undefined;
-  @Input() options: CzIdOptions;
+  @Input() options?: CzIdOptions;
   /**
    * Validation uses your RegExp and min/max validation for age.
    * Validation for correctness of ID (Rodné číslo) is turned off,
@@ -73,7 +73,7 @@ export class IdInputDirective
   touchedFn: any = null;
   changeFn: any = null;
   disabled = false;
-  emitted = null;
+  emitted: string | null = null;
 
   prevValue = '';
 
@@ -90,9 +90,12 @@ export class IdInputDirective
     if (this.options?.replaceSlashOnCopy !== false) {
       this.zone.runOutsideAngular(() => {
         const sub = fromEvent(this.el.nativeElement, 'copy').subscribe(
-          (event: ClipboardEvent) => {
-            const text = window.getSelection().toString().replace(/\//g, '');
-            event.clipboardData.setData('text/plain', text);
+          (event: Event) => {
+            const text = window.getSelection()?.toString().replace(/\//g, '');
+            (event as ClipboardEvent).clipboardData?.setData(
+              'text/plain',
+              text || '',
+            );
             event.preventDefault();
           },
         );
@@ -123,10 +126,11 @@ export class IdInputDirective
     this.touchedFn?.();
   }
 
-  onInput(value: string) {
+  onInput(value: string | null) {
     const id = value?.match(/\d+/g);
 
-    if (!id) {
+    // `!value` check is necessary just for typescript
+    if (!id || !value) {
       this.updateView('');
 
       if (this.emitted !== null) {
