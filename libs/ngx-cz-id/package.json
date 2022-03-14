@@ -1,7 +1,7 @@
 {
   "name": "@stumpam/ngx-cz-id",
   "license": "MIT",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Angular input for czech id (Rodné číslo) with validation.",
   "homepage": "https://github.com/stumpam/ngx-cz-id",
   "author": "Martin Štumpa (https://github.com/stumpam)",
@@ -22,7 +22,8 @@
   },
   "peerDependencies": {
     "@angular/common": "^13.2.0",
-    "@angular/core": "^13.2.0"
+    "@angular/core": "^13.2.0",
+    "@angular/cdk": "^13.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
