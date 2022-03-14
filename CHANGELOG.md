@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.5](https://github.com/stumpam/ngx-cz-id/compare/v3.0.4...v3.0.5) (2022-03-14)
+
+
+### Bug Fixes
+
+* add angular/cdk to peer dependencies ([67d43c0](https://github.com/stumpam/ngx-cz-id/commit/67d43c04454f6f56c2c8d77e6d09289e0b0f3759))
+
 ### [3.0.4](https://github.com/stumpam/ngx-cz-id/compare/v3.0.3...v3.0.4) (2022-03-03)
 
 
