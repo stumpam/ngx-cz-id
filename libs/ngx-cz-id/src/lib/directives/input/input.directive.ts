@@ -124,6 +124,10 @@ export class IdInputDirective
 
   onBlur() {
     this.touchedFn?.();
+
+    if (!this.emitted) {
+      this.changeFn?.(null);
+    }
   }
 
   onInput(value: string | null) {
@@ -219,7 +223,15 @@ export class IdInputDirective
   }
 
   validate({ value }: FormControl) {
-    if (!value && !this.required) return null;
+    if (!value) {
+      if (this.options?.nonEmptyError && this.el.nativeElement.value !== '') {
+        return { invalidCzId: true };
+      }
+
+      if (!this.required) {
+        return null;
+      }
+    }
 
     const { year, month, day, num } = splitIdString(value);
 
