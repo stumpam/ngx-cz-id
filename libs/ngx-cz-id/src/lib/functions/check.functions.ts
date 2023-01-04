@@ -3,9 +3,11 @@ import { padStart } from '../functions/format.functions';
 const nextYear = new Date().getFullYear() - 1999;
 
 export function isValidCzId(id: string): boolean {
-  const { year, month, day, num } = splitIdString(id.replace('/', ''));
+  const normalizedId = id.replace('/', '');
+  const { year, month, day, num } = splitIdString(normalizedId);
+  const historicId = normalizedId.length === 9;
 
-  return checkId(year, month, day, num);
+  return checkId(year, month, day, num, historicId);
 }
 
 export function dateFromCzId(id: string): Date | undefined {
@@ -19,11 +21,16 @@ export function dateFromCzId(id: string): Date | undefined {
   return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
+/**
+ * If historicId attribute is set to true (usually that czech id has just 9 numbers) it assumes, that
+ * person is older than 1954
+ */
 export function checkId(
   year: string,
   month: string,
   day: string,
   num: string,
+  historicId: boolean = false,
 ): boolean {
   const y = +year;
   const m = +month;
@@ -44,7 +51,7 @@ export function checkId(
     return false;
   }
 
-  const dateYear = convertYear(y);
+  const dateYear = convertYear(y, historicId);
   const dateMonth = convertMonth(m);
 
   if (Number.isNaN(Date.parse(`${dateYear}-${dateMonth}-${padStart(day)}`))) {
@@ -61,13 +68,13 @@ function checkSum(
   num: string,
 ): boolean {
   const mod = +`${year}${month}${day}${num.slice(0, 3)}` % 11;
-  const lastNum = parseInt(num.slice(3), 10);
+  const lastNum = Number.parseInt(num.slice(3), 10);
 
   return mod === 10 ? lastNum === 0 : lastNum === mod;
 }
 
-export function convertYear(y: number): string {
-  return y > new Date().getFullYear() - 2000
+export function convertYear(y: number, historicId = false): string {
+  return historicId || y > new Date().getFullYear() - 2000
     ? '19' + padStart(y)
     : '20' + padStart(y);
 }
@@ -75,17 +82,21 @@ export function convertYear(y: number): string {
 export function convertMonth(m: number): string {
   let month = m;
   switch (true) {
-    case m >= 1 && m <= 12:
+    case m >= 1 && m <= 12: {
       month = m;
       break;
-    case m >= 21 && m <= 32:
+    }
+    case m >= 21 && m <= 32: {
       month = m - 20;
       break;
-    case m >= 51 && m <= 62:
+    }
+    case m >= 51 && m <= 62: {
       month = m - 50;
       break;
-    case m >= 71 && m <= 82:
+    }
+    case m >= 71 && m <= 82: {
       month = m - 70;
+    }
   }
   return padStart(month);
 }
