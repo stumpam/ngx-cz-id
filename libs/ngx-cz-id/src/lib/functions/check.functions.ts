@@ -1,7 +1,5 @@
 import { padStart } from '../functions/format.functions';
 
-const nextYear = new Date().getFullYear() - 1999;
-
 export function isValidCzId(id: string): boolean {
   const normalizedId = id.replace('/', '');
   const { year, month, day, num } = splitIdString(normalizedId);
@@ -58,7 +56,7 @@ export function checkId(
     return false;
   }
 
-  return y < 54 && y > nextYear ? true : checkSum(year, month, day, num);
+  return historicId ? true : checkSum(year, month, day, num);
 }
 
 function checkSum(
@@ -107,6 +105,6 @@ export function splitIdString(str: string) {
     year,
     month: str?.slice(2, 4),
     day: str?.slice(4, 6),
-    num: str?.slice(6, +year < 54 && +year > nextYear ? 9 : 10),
+    num: str?.slice(6),
   };
 }
