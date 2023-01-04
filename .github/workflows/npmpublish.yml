@@ -8,27 +8,61 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+       # Check out the repository
+      - uses: actions/checkout@v3
         with:
-          node-version: 17
-          registry-url: https://registry.npmjs.org/
-      - run: pnpm
-      - run: pnpm build ngx-cz-id --prod
-      - run: pnpm publish dist/libs/ngx-cz-id --access public
+          fetch-depth: 0
+
+      # Install Pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.1
+        with:
+          version: "7.x"
+      # Install Node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: 'https://registry.npmjs.org/'
+          cache: 'pnpm'
+      # Install workspace dependencies
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build ngx-cz-id --prod
+
+      - run: pnpm publish dist/libs/ngx-cz-id --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
   publish-gpr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+          # Check out the repository
+      - uses: actions/checkout@v3
         with:
-          node-version: 17
+          fetch-depth: 0
+
+      # Install Pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.1
+        with:
+          version: "7.x"
+      # Install Node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
           registry-url: https://npm.pkg.github.com/
-      - run: pnpm
-      - run: pnpm build ngx-cz-id --prod
-      - run: pnpm publish dist/libs/ngx-cz-id
+          cache: 'pnpm'
+      # Install workspace dependencies
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build ngx-cz-id --prod
+        
+      - run: pnpm publish dist/libs/ngx-cz-id --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
