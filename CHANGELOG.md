@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/stumpam/ngx-cz-id/compare/v3.1.0...v3.2.0) (2023-01-04)
+
+
+### Features
+
+* add historic id check ([f9a44fe](https://github.com/stumpam/ngx-cz-id/commit/f9a44fe7ec3ec0ff0754f96124c77575967e85e0))
+* make library standalone ([0a51174](https://github.com/stumpam/ngx-cz-id/commit/0a5117409567862098722b561eb7d880a5aef1ca))
+
 ## [3.1.0](https://github.com/stumpam/ngx-cz-id/compare/v3.0.5...v3.1.0) (2022-11-02)
 
 
