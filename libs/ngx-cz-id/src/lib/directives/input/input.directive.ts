@@ -39,8 +39,6 @@ const ID_VALUE_VALIDATOR = {
   multi: true,
 };
 
-const nextYear = new Date().getFullYear() - 1999;
-
 @Directive({
   selector: '[ngxCzId]',
   standalone: true,
@@ -171,7 +169,7 @@ export class NgxCzIdDirective
       return;
     }
 
-    if (string.length === (+year < 54 && +year > nextYear ? 10 : 11)) {
+    if (string.length === 10 || string.length === 11) {
       if (this.emitted !== value) {
         this.emitted = value;
         const str = string.replace('/', '');
@@ -179,7 +177,7 @@ export class NgxCzIdDirective
         this.changeFn?.(
           this.options?.emitInvalid
             ? str
-            : checkId(year, month, day, num)
+            : checkId(year, month, day, num, str.length === 9)
             ? str
             : null,
         );
