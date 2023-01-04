@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.2](https://github.com/stumpam/ngx-cz-id/compare/v3.2.1...v3.2.2) (2023-01-04)
+
+
+### Bug Fixes
+
+* emit even 9 digits ([e5cb454](https://github.com/stumpam/ngx-cz-id/commit/e5cb4544007d6bd79f2a9167b6edb719afdb0438))
+
 ### [3.2.1](https://github.com/stumpam/ngx-cz-id/compare/v3.2.0...v3.2.1) (2023-01-04)
 
 
