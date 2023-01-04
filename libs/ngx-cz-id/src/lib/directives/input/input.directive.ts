@@ -237,7 +237,7 @@ export class NgxCzIdDirective
 
     const isNotValid = !(
       (this.options?.emitAll || this.emitted) &&
-      checkId(year, month, day, num)
+      checkId(year, month, day, num, value.length === 9)
     );
     const isNotMinValid = !(
       (this.options?.emitAll || this.emitted) &&
