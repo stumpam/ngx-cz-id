@@ -4,7 +4,7 @@ on:
   release:
     types: [published]
 
-jobs:    
+jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: 17
           registry-url: https://registry.npmjs.org/
-      - run: yarn
-      - run: yarn build ngx-cz-id --prod
-      - run: yarn publish dist/libs/ngx-cz-id --access public
+      - run: pnpm
+      - run: pnpm build ngx-cz-id --prod
+      - run: pnpm publish dist/libs/ngx-cz-id --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: 17
           registry-url: https://npm.pkg.github.com/
-      - run: yarn
-      - run: yarn build ngx-cz-id --prod
-      - run: yarn publish dist/libs/ngx-cz-id
+      - run: pnpm
+      - run: pnpm build ngx-cz-id --prod
+      - run: pnpm publish dist/libs/ngx-cz-id
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

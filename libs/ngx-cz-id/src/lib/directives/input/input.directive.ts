@@ -4,6 +4,7 @@ import {
   Directive,
   ElementRef,
   forwardRef,
+  HostListener,
   Input,
   NgZone,
   OnDestroy,
@@ -28,13 +29,13 @@ import { CzIdOptions } from '../../interfaces/cz-id.interface';
 
 const ID_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => IdInputDirective),
+  useExisting: forwardRef(() => NgxCzIdDirective),
   multi: true,
 };
 
 const ID_VALUE_VALIDATOR = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => IdInputDirective),
+  useExisting: forwardRef(() => NgxCzIdDirective),
   multi: true,
 };
 
@@ -42,13 +43,10 @@ const nextYear = new Date().getFullYear() - 1999;
 
 @Directive({
   selector: '[ngxCzId]',
-  host: {
-    '(blur)': 'onBlur()',
-    '(input)': 'onInput($event.target.value)',
-  },
+  standalone: true,
   providers: [ID_VALUE_ACCESSOR, ID_VALUE_VALIDATOR],
 })
-export class IdInputDirective
+export class NgxCzIdDirective
   implements ControlValueAccessor, OnInit, OnDestroy
 {
   @Input() min: number | undefined;
@@ -91,7 +89,7 @@ export class IdInputDirective
       this.zone.runOutsideAngular(() => {
         const sub = fromEvent(this.el.nativeElement, 'copy').subscribe(
           (event: Event) => {
-            const text = window.getSelection()?.toString().replace(/\//g, '');
+            const text = window.getSelection()?.toString().replaceAll('/', '');
             (event as ClipboardEvent).clipboardData?.setData(
               'text/plain',
               text || '',
@@ -122,6 +120,7 @@ export class IdInputDirective
     this.cd.markForCheck();
   }
 
+  @HostListener('blur')
   onBlur() {
     this.touchedFn?.();
 
@@ -130,6 +129,7 @@ export class IdInputDirective
     }
   }
 
+  @HostListener('input', ['$event.target.value'])
   onInput(value: string | null) {
     const id = value?.match(/\d+/g);
 
@@ -177,11 +177,11 @@ export class IdInputDirective
         const str = string.replace('/', '');
 
         this.changeFn?.(
-          !this.options?.emitInvalid
-            ? checkId(year, month, day, num)
-              ? str
-              : null
-            : str,
+          this.options?.emitInvalid
+            ? str
+            : checkId(year, month, day, num)
+            ? str
+            : null,
         );
       }
     } else if (this.emitted) {
@@ -222,7 +222,7 @@ export class IdInputDirective
       : age;
   }
 
-  validate({ value }: FormControl) {
+  validate({ value }: FormControl<string>) {
     if (!value) {
       if (this.options?.nonEmptyError && this.el.nativeElement.value !== '') {
         return { invalidCzId: true };

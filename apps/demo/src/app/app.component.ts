@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CzIdOptions } from '@stumpam/ngx-cz-id';
 
@@ -12,16 +12,16 @@ import { CzIdOptions } from '@stumpam/ngx-cz-id';
 export class AppComponent implements OnInit {
   title = 'Ngx-CZ-id';
 
-  ctrl = new FormControl('');
-  ctrl2 = new FormControl('');
-  ctrl3 = new FormControl('');
-  ctrl4 = new FormControl('');
+  ctrl = new UntypedFormControl('');
+  ctrl2 = new UntypedFormControl('');
+  ctrl3 = new UntypedFormControl('');
+  ctrl4 = new UntypedFormControl('');
 
   options: CzIdOptions = { emitAll: true, replaceSlashOnCopy: false };
 
-  exception = /^[0-9]{6}9999$/;
+  exception = /^\d{6}9{4}$/;
 
-  form = new FormGroup({});
+  form = new UntypedFormGroup({});
   model = {};
   fields: FormlyFieldConfig[] = [
     {
@@ -43,19 +43,19 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.ctrl.valueChanges.subscribe(val =>
-      console.log('appCmp: ', val, this.ctrl.errors),
+      console.log('appCmp:', val, this.ctrl.errors),
     );
     this.ctrl2.valueChanges.subscribe(val =>
-      console.log('appCmp2: ', val, this.ctrl2.errors),
+      console.log('appCmp2:', val, this.ctrl2.errors),
     );
     this.ctrl3.valueChanges.subscribe(val =>
-      console.log('appCmp3: ', val, this.ctrl3.errors),
+      console.log('appCmp3:', val, this.ctrl3.errors),
     );
     this.ctrl4.valueChanges.subscribe(val =>
-      console.log('appCmp4: ', val, this.ctrl4.errors),
+      console.log('appCmp4:', val, this.ctrl4.errors),
     );
     this.form.valueChanges.subscribe(val =>
-      console.log('formly: ', val, this.form.errors),
+      console.log('formly:', val, this.form.errors),
     );
   }
 }

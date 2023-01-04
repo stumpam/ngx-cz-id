@@ -2,20 +2,24 @@
 
 Angular input for czech id (Rodné číslo) with validation.
 
+From version 4 library uses Angular's standalone directives (Angular v15), so for backwards compatibility use version 3.
+
 ## Quick Start
 
-1. Import `NgxCzIdModule` to your project.
+1. Import `NgxCzIdDirective` to your project (module) or component.
 
 ```typescript
-import { NgxCzIdModule } from '@stumpam/ngx-cz-id';
+import { NgxCzIdDirective } from '@stumpam/ngx-cz-id';
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, NgxCzIdModule, ReactiveFormsModule],
-  providers: [],
-  bootstrap: [AppComponent],
+@Component({
+  selector: 'ngx-cz-id-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgxCzIdDirective],
 })
-export class AppModule {}
+export class AppComponent {}
 ```
 
 2. Use in HTML template
@@ -32,9 +36,12 @@ Exception accepts regexp which can bypass validation of ID (rodné číslo) in c
 
 ```typescript
 options: {
-  emitInvalid: false;
+  emitInvalid?: boolean;
   // emits all typed characters not just valid / invalid complete id
-  emitAll: boolean;
+  emitAll?: boolean;
+  replaceSlashOnCopy?: boolean;
+  // If input is not empty, but value is not correct, on blur event it will fire validation
+  nonEmptyError?: boolean;
 }
 ```
 

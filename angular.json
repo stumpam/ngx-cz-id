@@ -21,8 +21,13 @@
             "polyfills": "apps/demo/src/polyfills.ts",
             "tsConfig": "apps/demo/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/demo/src/favicon.ico", "apps/demo/src/assets"],
-            "styles": ["apps/demo/src/styles.scss"],
+            "assets": [
+              "apps/demo/src/favicon.ico",
+              "apps/demo/src/assets"
+            ],
+            "styles": [
+              "apps/demo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -54,7 +59,9 @@
               ]
             }
           },
-          "outputs": ["{options.outputPath}"]
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -76,10 +83,12 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/demo/jest.config.js",
+            "jestConfig": "apps/demo/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/apps/demo"]
+          "outputs": [
+            "{workspaceRoot}/coverage/apps/demo"
+          ]
         }
       },
       "tags": []
@@ -104,17 +113,21 @@
         }
       },
       "tags": [],
-      "implicitDependencies": ["demo"]
+      "implicitDependencies": [
+        "demo"
+      ]
     },
     "ngx-cz-id": {
       "projectType": "library",
       "root": "libs/ngx-cz-id",
       "sourceRoot": "libs/ngx-cz-id/src",
       "prefix": "ngx-cz-id",
-      "targets": {
+      "architect": {
         "build": {
-          "executor": "@nrwl/angular:package",
-          "outputs": ["dist/libs/ngx-cz-id"],
+          "builder": "@nrwl/angular:package",
+          "outputs": [
+            "{workspaceRoot}/dist/libs/ngx-cz-id"
+          ],
           "options": {
             "project": "libs/ngx-cz-id/ng-package.json"
           },
@@ -131,10 +144,21 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ngx-cz-id/jest.config.js",
+            "jestConfig": "libs/ngx-cz-id/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/ngx-cz-id"]
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/ngx-cz-id"
+          ]
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ngx-cz-id/**/*.ts",
+              "libs/ngx-cz-id/**/*.html"
+            ]
+          }
         }
       },
       "schematics": {

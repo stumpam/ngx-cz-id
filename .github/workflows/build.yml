@@ -2,20 +2,19 @@ name: Build library
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Run node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '17'
-    - run: yarn
-    - run: yarn build ngx-cz-id --prod
+      - uses: actions/checkout@v2
+      - name: Run node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "17"
+      - run: pnpm
+      - run: pnpm build ngx-cz-id --prod
